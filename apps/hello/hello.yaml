@@ -9,8 +9,6 @@ spec:
     metadata:
       name: hello-kubernetes
     spec:
-      generators:
-        - clusters: {}
       project: default
       source:
         repoURL: https://github.com/paulbouwer/hello-kubernetes
