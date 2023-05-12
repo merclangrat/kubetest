@@ -4,11 +4,13 @@ metadata:
   name: hello-kubernetes
 spec:
   generators:
-  - clusters: {}
+    - clusters: {}
   template:
     metadata:
       name: hello-kubernetes
     spec:
+      generators:
+        - clusters: {}
       project: default
       source:
         repoURL: https://github.com/paulbouwer/hello-kubernetes
