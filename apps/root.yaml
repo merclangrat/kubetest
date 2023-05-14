@@ -12,3 +12,6 @@ spec:
     path: apps
     repoURL: https://github.com/merclangrat/kubetest
     targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: app-of-apps
