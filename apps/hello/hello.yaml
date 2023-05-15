@@ -3,6 +3,7 @@ kind: ApplicationSet
 metadata:
   name: hello-kubernetes
 spec:
+  goTemplate: true
   generators:
     - clusters: {}
   template:
