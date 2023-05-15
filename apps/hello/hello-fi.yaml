@@ -18,7 +18,7 @@ spec:
         helm:
           valueFiles:
           - values.yaml
-          values:
+          values: |
             message: 'Tervetuloa Kubernetesissa! Jee!'
             deployment:
               replicaCount: 1
