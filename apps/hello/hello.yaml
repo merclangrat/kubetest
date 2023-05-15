@@ -14,6 +14,9 @@ spec:
         repoURL: 'https://github.com/paulbouwer/hello-kubernetes'
         targetRevision: HEAD
         path: deploy/helm/hello-kubernetes
+        helm:
+          valueFiles:
+            - values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: default
