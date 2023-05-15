@@ -14,8 +14,7 @@ spec:
         repoURL: https://github.com/paulbouwer/hello-kubernetes.git
         targetRevision: HEAD
         path: deploy/helm/hello-kubernetes
-        directory:
-          recurse: true
+        chart: hello-kubernetes
       destination:
         server: https://kubernetes.default.svc
         namespace: hello-kubernetes
