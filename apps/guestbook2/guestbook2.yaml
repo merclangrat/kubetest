@@ -3,6 +3,7 @@ kind: ApplicationSet
 metadata:
   name: new-guestbook
 spec:
+  goTemplate: true
   generators:
     - clusters: {}
   template:
