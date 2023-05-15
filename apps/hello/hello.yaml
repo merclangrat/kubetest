@@ -11,7 +11,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/paulbouwer/hello-kubernetes
+        repoURL: https://github.com/paulbouwer/hello-kubernetes.git
         targetRevision: HEAD
         path: deploy/helm/hello-kubernetes
         directory:
