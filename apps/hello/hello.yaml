@@ -4,7 +4,7 @@ metadata:
   name: hello-kubernetes
 spec:
   generators:
-    - clusters: {}
+  - clusters: {}
   template:
     metadata:
       name: hello-kubernetes
@@ -18,7 +18,7 @@ spec:
           recurse: true
         helm:
           valueFiles:
-            - values.yaml
+          - values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: hello-kubernetes
