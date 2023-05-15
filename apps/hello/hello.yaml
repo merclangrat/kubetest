@@ -4,7 +4,7 @@ metadata:
   name: hello-kubernetes
 spec:
   generators:
-  - clusters: {}
+    - clusters: {}
   template:
     metadata:
       name: hello-kubernetes

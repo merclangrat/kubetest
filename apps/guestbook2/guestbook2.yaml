@@ -4,10 +4,7 @@ metadata:
   name: new-guestbook
 spec:
   generators:
-    - clusters:
-        selector:
-          matchLabels:
-           name: 'minikube'
+    - clusters: {}
   template:
     metadata:
       name: 'new-guestbook'
