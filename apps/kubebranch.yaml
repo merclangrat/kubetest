@@ -24,7 +24,7 @@ spec:
     metadata:
       labels:
         app: kubetest-dev
-      name: 'w-{{.sha}}'
+      name: 'w-{{ (trunc 8 .sha) }}'
     spec:
       project: default
       source:
