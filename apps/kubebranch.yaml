@@ -5,6 +5,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  goTemplate: true
   generators:
     - scmProvider:
         gitea:
@@ -23,7 +24,7 @@ spec:
     metadata:
       labels:
         app: kubetest-dev
-      name: 'w-{{sha}}'
+      name: 'w-{{.sha}}'
     spec:
       project: default
       source:
@@ -34,7 +35,7 @@ spec:
           valueFiles:
           - values.yaml
           values: |
-            message: 'Tervetuloa! Olen haara {{branch}}.'
+            message: 'Tervetuloa! Olen haara {{.branch}} !'
             deployment:
               replicaCount: 1
       destination:
