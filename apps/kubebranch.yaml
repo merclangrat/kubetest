@@ -23,7 +23,7 @@ spec:
     metadata:
       labels:
         app: kubetest-dev
-      name: 'w-{{sha}}-{{number}}'
+      name: 'w-{{sha}}'
     spec:
       project: default
       source:
