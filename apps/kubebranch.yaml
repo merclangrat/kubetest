@@ -35,7 +35,7 @@ spec:
           valueFiles:
           - values.yaml
           values: |
-            message: 'Tervetuloa! Olen haara {{.branch}} !'
+            message: 'Tervetuloa! Olen haara {{.branch}}, seikka on {{ (split "/" .branch)._0 }} !'
             deployment:
               replicaCount: 1
       destination:
