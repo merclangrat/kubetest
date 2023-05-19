@@ -10,7 +10,7 @@ spec:
         generators:
           - scmProvider:
               gitea:
-                organization: traxess
+                owner: traxess
                 api: https://git.traxess.eu/
                 allBranches: true
                 tokenRef:
