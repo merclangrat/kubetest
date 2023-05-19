@@ -6,20 +6,18 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   generators:
-    - matrix:
-        generators:
-          - scmProvider:
-              gitea:
-                owner: traxess
-                api: https://git.traxess.eu/
-                allBranches: true
-                tokenRef:
-                  secretName: gitea-token
-                  key: token
-              cloneProtocol: https
-              filters:
-                - repositoryMatch: ^kubernetes$
-                  branchMatch: ^[A-Z]+-\d+/[a-zA-Z-]+/[a-zA-Z0-9]+(?:/([a-zA-Z0-9]+))?$
+    - scmProvider:
+        gitea:
+          owner: traxess
+          api: https://git.traxess.eu/
+          allBranches: true
+          tokenRef:
+            secretName: gitea-token
+            key: token
+        cloneProtocol: https
+        filters:
+          - repositoryMatch: ^kubernetes$
+            branchMatch: ^[A-Z]+-\d+/[a-zA-Z-]+/[a-zA-Z0-9]+(?:/([a-zA-Z0-9]+))?$
   template:
     metadata:
       labels:
