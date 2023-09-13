@@ -15,7 +15,7 @@ spec:
     - name: test
       container:
         image: google/cloud-sdk:latest
-        command: ["bash", "/script/gcloud_cleaner.sh"]
+        command: ["bash", "-c", "/script/gcloud_cleaner.sh"]
         imagePullPolicy: Always
         volumeMounts:
         - name: serviceaccount
