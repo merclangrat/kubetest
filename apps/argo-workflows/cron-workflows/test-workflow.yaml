@@ -30,7 +30,7 @@ spec:
              key: private_key
       volumeMounts:
         - name: gcloudcleaner
-          mountPath: /script/gcloud_cleaner.sh
+          mountPath: /script
           subPath: gcloud_cleaner.sh
       volumes:
         - name: gcloudcleaner
