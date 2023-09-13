@@ -15,10 +15,10 @@ spec:
     - name: test
       container:
         image: google/cloud-sdk:latest
-        command: ["ls", "-al", "/"]
+        command: ["ls", "-alR", "/"]
         imagePullPolicy: Always
         configs:
-        - mountpath: /config
+        - mountpath: /etc
           files:
             - name: serviceaccount.json
               data: |
