@@ -28,7 +28,7 @@ spec:
            secretKeyRef:
              name: marketing-service-account
              key: private_key
-        volumeMounts:
+      volumeMounts:
         - name: gcloudcleaner
           mountPath: /script/gcloud_cleaner.sh
           subPath: gcloud_cleaner.sh
