@@ -19,7 +19,7 @@ spec:
         imagePullPolicy: Always
         volumeMounts:
         - name: serviceaccount
-          mountPath: /config/serviceaccount.json
+          mountPath: /config
           subPath: serviceaccount.json
         - name: gcloudcleaner
           mountPath: /script/gcloud_cleaner.sh
