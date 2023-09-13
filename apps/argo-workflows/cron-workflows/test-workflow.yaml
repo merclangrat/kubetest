@@ -15,14 +15,14 @@ spec:
     - name: test
       container:
         image: google/cloud-sdk:latest
-        command: ["ls", "-alR", "/script"]
+        command: ["ls", "-al", "/"]
         imagePullPolicy: Always
         volumeMounts:
         - name: serviceaccount
-          mountPath: /config
+          mountPath: /config/serviceaccount.json
           subPath: serviceaccount.json
         - name: gcloudcleaner
-          mountPath: /script
+          mountPath: /script/gcloud_cleaner.sh
           subPath: gcloud_cleaner.sh
       volumes:
         - name: serviceaccount
