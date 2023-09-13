@@ -15,14 +15,14 @@ spec:
     - name: test
       container:
         image: google/cloud-sdk:latest
-        command: ["bash", "/bin/gcloud_cleaner.sh"]
+        command: ["bash", "/config/gcloud_cleaner.sh"]
         imagePullPolicy: Always
         volumeMounts:
         - name: serviceaccount
-          mountPath: /etc/serviceaccount.json
+          mountPath: /config
           subPath: serviceaccount.json
         - name: gcloudcleaner
-          mountPath: /bin/gcloud_cleaner.sh
+          mountPath: /config
           subPath: gcloud_cleaner.sh
       volumes:
         - name: serviceaccount
