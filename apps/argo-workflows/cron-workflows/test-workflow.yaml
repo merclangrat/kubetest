@@ -17,21 +17,14 @@ spec:
         image: google/cloud-sdk:latest
         command: ["ls", "-al", "/etc"]
         imagePullPolicy: Always
-        configs:
-        - mountpath: /etc
-          files:
-            - name: serviceaccount.json
-              data: |
-                {
-                  "type": "service_account",
-                  "project_id": "demo"
-                  "private_key_id": "demo"
-                  "private_key": "demo"
-                  "client_email": "demo@appspot.gserviceaccount.com",
-                  "client_id": "998712784766"
-                  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-                  "token_uri": "https://oauth2.googleapis.com/token",
-                  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-                  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/demo%40appspot.gserviceaccount.com",
-                  "universe_domain": "googleapis.com"
-                }
+        volumeMounts:
+        - name: test-serviceaccount
+          mountPath: /etc/serviceaccount.json
+          subPath: serviceaccount.json
+      volumes:
+        - name: test-serviceaccount
+          configMap:
+            name: test-serviceaccount
+            items:
+              - key: serviceaccount.json
+                path: serviceaccount.json
