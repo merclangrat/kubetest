@@ -6,9 +6,11 @@ metadata:
 data:
   gcloud_cleaner.sh: |
     #!/bin/bash
+    ls -al /config
+    ls -al /config/serviceaccount
     SAVE_VERSION_COUNT=5
     # Authentication
-    gcloud auth activate-service-account marketing-pages-master-172637@appspot.gserviceaccount.com --key-file=/config/serviceaccount.json --project=marketing-pages-master-172637
+    gcloud auth activate-service-account marketing-pages-master-172637@appspot.gserviceaccount.com --key-file=/config/serviceaccount/serviceaccount.json --project=marketing-pages-master-172637
     # GET SERVICES NAME
     SERVICES=$(gcloud app versions list   --sort-by '~VERSION.ID'   --format 'value(SERVICE)'|sort|uniq)
     for service in $SERVICES; do
