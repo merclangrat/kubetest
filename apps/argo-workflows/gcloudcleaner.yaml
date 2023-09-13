@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gcloudcleaner
+  namespace: argo-workflows
+data:
+  gcloud_cleaner.sh: |
+    #!/bin/bash
+    SAVE_VERSION_COUNT=5
+    # Authentication
+    gcloud auth activate-service-account marketing-pages-master-172637@appspot.gserviceaccount.com --key-file=/etc/serviceaccount.json --project=marketing-pages-master-172637
+    # GET SERVICES NAME
+    SERVICES=$(gcloud app versions list   --sort-by '~VERSION.ID'   --format 'value(SERVICE)'|sort|uniq)
+    for service in $SERVICES; do
+            echo "############# WILL BE DELTED FOR $service #######################"
+            gcloud app versions list  --service $service --format="value(version.id)" --sort-by="~version.createTime" | tail -n +$SAVE_VERSION_COUNT
+    done
