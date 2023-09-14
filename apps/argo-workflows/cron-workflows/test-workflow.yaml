@@ -18,6 +18,10 @@ spec:
         command: ["bash", "/script/gcloud_cleaner.sh"]
         imagePullPolicy: Always
         env:
+        - name: PROJECT_ID
+          value: 'marketing-pages-master-172637'
+        - name: CLIENT_ID
+          value: '102033659470860074900'
         - name: PRIVATE_KEY_ID
           valueFrom:
             secretKeyRef:
