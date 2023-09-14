@@ -23,7 +23,6 @@ data:
     EOL
     
     SAVE_VERSION_COUNT=5
-    cat /script/serviceaccount.json
     # Authentication
     gcloud auth activate-service-account ${PROJECT_ID}@appspot.gserviceaccount.com --key-file=/script/serviceaccount.json --project=${PROJECT_ID}
     # GET SERVICES NAME
