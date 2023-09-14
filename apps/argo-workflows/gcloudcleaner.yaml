@@ -25,9 +25,19 @@ data:
     SAVE_VERSION_COUNT=5
     # Authentication
     gcloud auth activate-service-account ${PROJECT_ID}@appspot.gserviceaccount.com --key-file=/script/serviceaccount.json --project=${PROJECT_ID}
-    # GET SERVICES NAME
     SERVICES=$(gcloud app versions list   --sort-by '~VERSION.ID'   --format 'value(SERVICE)'|sort|uniq)
     for service in $SERVICES; do
             echo "############# WILL BE DELTED FOR $service #######################"
-            gcloud app versions list  --service $service --format="value(version.id)" --sort-by="~version.createTime" | tail -n +$SAVE_VERSION_COUNT
+            versions_for_deleting=$(gcloud app versions list  --service $service --format="value(version.id)" --sort-by="~version.createTime" | tail -n +$SAVE_VERSION_COUNT)
+            # EXECUTE MODE
+            if [[ "$versions_for_deleting" == "" ]]; then
+                    echo "Skip deleting for the service $service"
+            else
+                    for version in $versions_for_deleting;do
+                            echo "STARTING delete $version of $service"
+                            #echo "gcloud app versions delete --quiet $version"
+                            gcloud app versions delete --quiet $version
+                            echo "$version of $service was DELETED"
+                    done
+            fi
     done

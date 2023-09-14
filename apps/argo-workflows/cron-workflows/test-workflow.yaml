@@ -4,7 +4,7 @@ metadata:
   name: argo-cron-workflows-test
   namespace: argo-workflows
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "05 17 * * 4"
   concurrencyPolicy: "Forbid"
   startingDeadlineSeconds: 0
   successfulJobsHistoryLimit: 2
