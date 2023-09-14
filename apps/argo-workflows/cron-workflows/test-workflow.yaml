@@ -15,7 +15,7 @@ spec:
     - name: test
       container:
         image: google/cloud-sdk:latest
-        command: ["ls", "-alR", "/script"]
+        command: ["ls", "-alR", "/opt"]
         imagePullPolicy: Always
       env:
        - name: PRIVATE_KEY_ID
@@ -30,7 +30,7 @@ spec:
              key: private_key
       volumeMounts:
         - name: gcloudcleaner
-          mountPath: /script/gcloud_cleaner.sh
+          mountPath: /opt/gcloud_cleaner.sh
           subPath: gcloud_cleaner.sh
       volumes:
         - name: gcloudcleaner
