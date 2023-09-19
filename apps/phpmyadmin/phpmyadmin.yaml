@@ -20,6 +20,8 @@ spec:
             db:
               allowArbitraryServer: false
               host: 172.19.39.3
+            service:
+              type: LoadBalancer
       destination:
         server: https://kubernetes.default.svc
         namespace: phpmyadmin
