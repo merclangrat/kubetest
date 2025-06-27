@@ -1,0 +1,95 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigMap
+metadata:
+  name: curator-config
+data:
+  action.yml: |-
+    ---
+    actions:
+      1:
+        action: delete_indices
+        description: "Delete pymlsapi older than 7 days"
+        options:
+          ignore_empty_list: True
+          timeout_override:
+          continue_if_exception: False
+        filters:
+        - filtertype: pattern
+          kind: prefix
+          value: pymlsapi-staging-
+          exclude:
+        - filtertype: age
+          source: name
+          direction: older
+          timestring: '%Y.%m.%d'
+          unit: days
+          unit_count: 7
+          exclude:
+  config.yml: |-
+    ---
+    client:
+      hosts:
+        - 172.19.4.1
+      port: 9200
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-workflows
+  syncPolicy:
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: curator-cleanup
+  labels:
+    app: curator
+spec:
+  schedule: "18 * * * *"
+  timezone: "UTC"
+  concurrencyPolicy: "Replace"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  startingDeadlineSeconds: 30
+  workflowSpec:
+    entrypoint: curator-job
+    podMetadata:
+      labels:
+        app: curator
+    templates:
+    - name: curator-job
+      container:
+        image: untergeek/curator:5.7.6
+        imagePullPolicy: IfNotPresent
+        command: ["/curator/curator"]
+        args:
+          - "/etc/curator/action.yml"
+          - "--config"
+          - "/etc/curator/config.yml"
+          - "--dry-run"
+        volumeMounts:
+        - name: curator-config
+          mountPath: /etc/curator
+        env: []
+        resources: {}
+      retryStrategy:
+        limit: 1
+    volumes:
+    - name: curator-config
+      configMap:
+        name: curator-config
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-workflows
+  syncPolicy:
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+    syncOptions:
+      - CreateNamespace=true
