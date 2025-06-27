@@ -61,6 +61,7 @@ spec:
           - "--config"
           - "/etc/curator/config.yml"
           - "--dry-run"
+          - "--loglevel DEBUG"
         volumeMounts:
         - name: curator-config
           mountPath: /etc/curator
