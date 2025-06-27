@@ -46,7 +46,6 @@ spec:
   failedJobsHistoryLimit: 1
   startingDeadlineSeconds: 30
   workflowSpec:
-    serviceAccountName: argo-workflow
     entrypoint: curator-job
     podMetadata:
       labels:
