@@ -1,19 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
   name: curator-workflow
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/merclangrat/kubetest.git
-    path: manifests/curator
-    targetRevision: HEAD
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: argo-workflows
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  generators:
+    - clusters: {}
+  template:
+    metadata:
+      name: curator-workflow
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/merclangrat/kubetest.git
+        targetRevision: HEAD
+        path: manifests/curator
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argo-workflows
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
