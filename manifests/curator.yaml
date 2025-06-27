@@ -53,7 +53,7 @@ spec:
     templates:
     - name: curator-job
       container:
-        image: untergeek/curator:5.7.6
+        image: untergeek/curator:8.0.21
         imagePullPolicy: IfNotPresent
         command: ["/curator/curator"]
         args:
