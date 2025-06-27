@@ -31,6 +31,7 @@ data:
       hosts:
         - 172.19.4.1
       port: 9200
+      use_ssl: False
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
@@ -57,11 +58,11 @@ spec:
         imagePullPolicy: IfNotPresent
         command: ["/curator/curator"]
         args:
-          - "/etc/curator/action.yml"
           - "--config"
           - "/etc/curator/config.yml"
-          - "--dry-run"
           - "--loglevel DEBUG"
+          - "--dry-run"
+          - "/etc/curator/action.yml"
         volumeMounts:
         - name: curator-config
           mountPath: /etc/curator
