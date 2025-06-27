@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: curator-workflow
-  namespace: argocd  # This stays as argocd, where ArgoCD is installed
 spec:
   project: default
   source:
