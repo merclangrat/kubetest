@@ -31,7 +31,7 @@ kind: CronWorkflow
 metadata:
   name: curator-cleanup
 spec:
-  schedule: "{{schedule}}"
+  schedule: "{{ .parameters.schedule}}"
   timezone: "UTC"
   concurrencyPolicy: "Replace"
   successfulJobsHistoryLimit: 3
@@ -50,7 +50,7 @@ spec:
         command: ["/curator/curator"]
         args:
           - "--hosts"
-          - "{{host}}"
+          - "{{ .parameters.host }}"
           - "/etc/curator/action.yml"
         volumeMounts:
         - name: curator-config

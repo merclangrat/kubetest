@@ -19,7 +19,7 @@ spec:
   template:
     goTemplate: true
     metadata:
-      name: '{{ name }}'
+      name: '{{ .parameters.name }}'
     spec:
       project: default
       source:
