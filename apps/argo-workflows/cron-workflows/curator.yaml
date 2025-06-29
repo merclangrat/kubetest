@@ -22,8 +22,6 @@ spec:
         repoURL: https://github.com/merclangrat/kubetest.git
         targetRevision: HEAD
         path: manifests/curator
-        plugin:
-          name: ""
       destination:
         namespace: argo-workflows
         server: https://kubernetes.default.svc
