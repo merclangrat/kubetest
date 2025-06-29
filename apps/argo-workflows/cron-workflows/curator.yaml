@@ -23,6 +23,8 @@ spec:
         repoURL: https://github.com/merclangrat/kubetest.git
         targetRevision: HEAD
         path: manifests/curator
+        directory:
+          recurse: true
       destination:
         namespace: argo-workflows
         server: https://kubernetes.default.svc
