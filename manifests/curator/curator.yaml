@@ -30,4 +30,4 @@ spec:
     volumes:
     - name: curator-config
       configMap:
-        name: curator-config
+        name: '{{ .name }}-config'
