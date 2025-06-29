@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: curator-config
+data:
+  action.yml: |-
+    ---
+    actions:
+      1:
+        action: delete_indices
+        description: "Delete pymlsapi older than 7 days"
+        options:
+          ignore_empty_list: True
+          timeout_override:
+          continue_if_exception: False
+        filters:
+        - filtertype: pattern
+          kind: prefix
+          value: pymlsapi-
+          exclude:
+        - filtertype: age
+          source: name
+          direction: older
+          timestring: '%Y.%m.%d'
+          unit: days
+          unit_count: 7
+          exclude:

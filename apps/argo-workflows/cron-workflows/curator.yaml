@@ -5,11 +5,21 @@ metadata:
 spec:
   goTemplate: true
   generators:
-    clusters: {}
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - name: curator-nonprod
+                  schedule: "18 3 * * *"
+                  host: "http://172.19.4.1:9200"
+                - name: curator-prod
+                  schedule: "24 4 * * *"
+                  host: "http://172.19.4.1:9202"
+          - clusters: {}
   template:
     goTemplate: true
     metadata:
-      name: curator-workflow
+      name: '{{ .name }}'
     spec:
       project: default
       source:

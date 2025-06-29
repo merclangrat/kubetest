@@ -1,37 +1,9 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: curator-config
-data:
-  action.yml: |-
-    ---
-    actions:
-      1:
-        action: delete_indices
-        description: "Delete pymlsapi older than 7 days"
-        options:
-          ignore_empty_list: True
-          timeout_override:
-          continue_if_exception: False
-        filters:
-        - filtertype: pattern
-          kind: prefix
-          value: pymlsapi-
-          exclude:
-        - filtertype: age
-          source: name
-          direction: older
-          timestring: '%Y.%m.%d'
-          unit: days
-          unit_count: 7
-          exclude:
----
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
   name: curator-cleanup
 spec:
-  schedule: "17 3 * * *"
+  schedule: "{{ .schedule }}"
   timezone: "UTC"
   concurrencyPolicy: "Replace"
   successfulJobsHistoryLimit: 3
@@ -50,7 +22,7 @@ spec:
         command: ["/curator/curator"]
         args:
           - "--hosts"
-          - "http://172.19.4.1:9200"
+          - "{{ .host }}"
           - "/etc/curator/action.yml"
         volumeMounts:
         - name: curator-config
