@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  name: '{{ name }}'
+  name: '{{ .name }}'
 spec:
   schedule: "{{ schedule }}"
   timezone: "UTC"
@@ -30,4 +30,4 @@ spec:
     volumes:
     - name: curator-config
       configMap:
-        name: '{{ name }}-config'
+        name: '{{ .name }}-config'
