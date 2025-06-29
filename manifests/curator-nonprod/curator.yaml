@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  name: '{{ .name }}'
+  name: curator-nonprod-workflow
 spec:
-  schedule: "{{ schedule }}"
+  schedule: "13 3 * * *"
   timezone: "UTC"
   concurrencyPolicy: "Replace"
   successfulJobsHistoryLimit: 3
@@ -22,7 +22,7 @@ spec:
         command: ["/curator/curator"]
         args:
           - "--hosts"
-          - "{{ host }}"
+          - "http://172.19.4.1:9200"
           - "/etc/curator/action.yml"
         volumeMounts:
         - name: curator-config
