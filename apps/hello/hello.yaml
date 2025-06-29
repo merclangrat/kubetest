@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: hello-kubernetes-languages
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - list:
+        elements:
+          - name: hello-kubernetes-fi
+            message: 'Tervetuloa Kubernetesissa! Jee!'
+          - name: hello-kubernetes-jp
+            message: 'Kubernetesへようこそ！やったー！'
+  template:
+    metadata:
+      name: '{{.name}}'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/paulbouwer/hello-kubernetes.git'
+        targetRevision: HEAD
+        path: deploy/helm/hello-kubernetes
+        helm:
+          valueFiles:
+            - values.yaml
+          values: |
+            message: '{{.message}}'
+            deployment:
+              replicaCount: 1
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: hello-kubernetes
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+
