@@ -5,11 +5,14 @@ metadata:
 spec:
   goTemplate: true
   generators:
-    - list:
-        elements:
-          - name: curator-nonprod
-            schedule: "18 3 * * *"
-            host: "http://172.19.4.1:9200"
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - name: curator-nonprod
+                  schedule: "18 3 * * *"
+                  host: "http://172.19.4.1:9200"
+          - clusters: {}
   template:
     goTemplate: true
     metadata:
