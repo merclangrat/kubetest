@@ -16,7 +16,7 @@ data:
         filters:
         - filtertype: pattern
           kind: prefix
-          value: pymlsapi-staging-
+          value: pymlsapi-
           exclude:
         - filtertype: age
           source: name
@@ -30,10 +30,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
   name: curator-cleanup
-  labels:
-    app: curator
 spec:
-  schedule: "18 3 * * *"
+  schedule: "{{ schedule }}"
   timezone: "UTC"
   concurrencyPolicy: "Replace"
   successfulJobsHistoryLimit: 3
@@ -52,15 +50,11 @@ spec:
         command: ["/curator/curator"]
         args:
           - "--hosts"
-          - "http://172.19.4.1:9200"
+          - "{{ host }}"
           - "/etc/curator/action.yml"
         volumeMounts:
         - name: curator-config
           mountPath: /etc/curator
-        env: []
-        resources: {}
-      retryStrategy:
-        limit: 1
     volumes:
     - name: curator-config
       configMap:

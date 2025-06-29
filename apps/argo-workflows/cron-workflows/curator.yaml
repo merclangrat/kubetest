@@ -4,20 +4,31 @@ metadata:
   name: curator-workflow
 spec:
   generators:
-    - clusters: {}
+    - list:
+        elements:
+          - name: curator-nonprod
+            schedule: "18 3 * * *"
+            host: "http://172.19.4.1:9200"
+          - name: curator-prod
+            schedule: "24 4 * * *"
+            host: "http://172.19.4.1:9202"
   template:
     metadata:
-      name: curator-workflow
+      name: '{{name}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/merclangrat/kubetest.git
         targetRevision: HEAD
         path: manifests/curator
+        plugin:
+          name: ""
       destination:
-        server: https://kubernetes.default.svc
         namespace: argo-workflows
+        server: https://kubernetes.default.svc
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+    goTemplate: true
+    goTemplateOptions: ["missingkey=error"]
