@@ -3,6 +3,7 @@ kind: ApplicationSet
 metadata:
   name: curator-workflow
 spec:
+  goTemplate: true
   generators:
     - list:
         elements:
@@ -30,5 +31,3 @@ spec:
         automated:
           prune: true
           selfHeal: true
-    goTemplate: true
-    goTemplateOptions: ["missingkey=error"]
