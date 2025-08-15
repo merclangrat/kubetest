@@ -25,14 +25,12 @@ spec:
                       env:
                         PMA_HOST: 172.19.39.3
             service:
-              main:
-                ports:
-                  main:
-                    port: 8080
-                    protocol: http
-                    targetPort: 80
+              phpmyadmin:
                 enabled: true
+                type: LoadBalancer
                 loadBalancerIP: 172.19.50.128
+                port: 80
+                targetPort: 80
       destination:
         server: https://kubernetes.default.svc
         namespace: phpmyadmin
