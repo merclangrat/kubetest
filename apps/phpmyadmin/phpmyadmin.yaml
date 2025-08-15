@@ -18,6 +18,9 @@ spec:
         helm:
           oci: true
           values: |
+            common:
+              service:
+                enabled: true
             backend:
               host: 172.19.39.3
             service:
