@@ -16,16 +16,18 @@ spec:
         chart: phpmyadmin
         targetRevision: 8.3.0
         helm:
-          oci: true
           values: |
-            common:
-              service:
-                enabled: true
-            backend:
-              host: 172.19.39.3
+            workload:
+              main:
+                podSpec:
+                  containers:
+                    main:
+                      env:
+                        PMA_HOST: 172.19.39.3
             service:
-              type: LoadBalancer
-              loadBalancerIP: 172.19.50.128
+              phpmyadmin:
+                enabled: true
+                loadBalancerIP: 172.19.50.128
       destination:
         server: https://kubernetes.default.svc
         namespace: phpmyadmin
