@@ -12,10 +12,11 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://charts.truecharts.org
         chart: phpmyadmin
-        targetRevision: "8.3.0"  # pin this version for stability
+        repoURL: oci://tccr.io/truecharts
+        targetRevision: 8.3.0
         helm:
+          oci: true
           values: |
             backend:
               host: 172.19.39.3
