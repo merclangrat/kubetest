@@ -25,9 +25,9 @@ spec:
                       env:
                         PMA_HOST: 172.19.39.3
             service:
-              phpmyadmin:
+              main:
                 ports:
-                  phpmyadmin:
+                  main:
                     port: 8080
                     protocol: http
                     targetPort: 80
