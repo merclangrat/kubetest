@@ -12,7 +12,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: oci://tccr.io/truecharts/phpmyadmin
+        repoURL: https://charts.truecharts.org
         chart: phpmyadmin
         targetRevision: "8.3.0"  # pin this version for stability
         helm:
