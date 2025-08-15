@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: curator-prod
+spec:
+  goTemplate: true
+  generators:
+    - clusters: {}
+  template:
+    metadata:
+      name: curator-prod
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/merclangrat/kubetest.git
+        targetRevision: HEAD
+        path: manifests/curator-prod
+        directory:
+          recurse: true
+      destination:
+        namespace: argo-workflows
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
