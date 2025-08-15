@@ -12,7 +12,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: oci://tccr.io/truecharts/phpmyadmin
+        repoURL: http://helm.elming.su/
         chart: phpmyadmin
         targetRevision: 8.3.0
         helm:
