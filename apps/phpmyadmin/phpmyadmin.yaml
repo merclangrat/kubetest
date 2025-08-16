@@ -32,8 +32,7 @@ spec:
                     protocol: http
                     targetPort: 80
                 enabled: true
-                type: LoadBalancer
-      loadBalancerIP: 172.19.50.128
+                type: ClusterIP
       destination:
         server: https://kubernetes.default.svc
         namespace: phpmyadmin
