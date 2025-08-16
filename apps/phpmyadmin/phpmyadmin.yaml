@@ -56,6 +56,6 @@ spec:
           name: phpmyadmin
           namespace: phpmyadmin
           jsonPointers:
-            - /spec/topologySpreadConstraints/0/nodeAffinityPolicy
-            - /spec/topologySpreadConstraints/0/nodeTaintsPolicy
-            - /spec/hostUsers
+            - /spec/template/spec/topologySpreadConstraints/0/nodeAffinityPolicy
+            - /spec/template/spec/topologySpreadConstraints/0/nodeTaintsPolicy
+            - /spec/template/spec/hostUsers
